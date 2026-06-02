@@ -1,0 +1,179 @@
+[
+  {
+    "transaction_id": "tx_1001",
+    "user_id": "u_001",
+    "score": 0,
+    "level": "low",
+    "decision": "approve",
+    "factors": []
+  },
+  {
+    "transaction_id": "tx_1002",
+    "user_id": "u_002",
+    "score": 100,
+    "level": "high",
+    "decision": "block",
+    "factors": [
+      {
+        "name": "high_amount",
+        "points": 25,
+        "explanation": "Transaction amount is at or above 1000."
+      },
+      {
+        "name": "ip_billing_mismatch",
+        "points": 15,
+        "explanation": "IP country differs from billing country."
+      },
+      {
+        "name": "new_account",
+        "points": 15,
+        "explanation": "Account is less than 7 days old."
+      },
+      {
+        "name": "many_failed_logins",
+        "points": 20,
+        "explanation": "Five or more failed login attempts were observed."
+      },
+      {
+        "name": "velocity_spike",
+        "points": 20,
+        "explanation": "Five or more transactions occurred in the last hour."
+      },
+      {
+        "name": "new_device",
+        "points": 10,
+        "explanation": "Transaction originated from a new device."
+      },
+      {
+        "name": "high_risk_country",
+        "points": 15,
+        "explanation": "Transaction is associated with a high-risk country flag."
+      },
+      {
+        "name": "repeated_chargebacks",
+        "points": 20,
+        "explanation": "User has two or more prior chargebacks."
+      },
+      {
+        "name": "unusual_hour",
+        "points": 5,
+        "explanation": "Transaction occurred between midnight and 5 AM."
+      }
+    ]
+  },
+  {
+    "transaction_id": "tx_1003",
+    "user_id": "u_003",
+    "score": 48,
+    "level": "medium",
+    "decision": "manual_review",
+    "factors": [
+      {
+        "name": "medium_high_amount",
+        "points": 15,
+        "explanation": "Transaction amount is at or above 500."
+      },
+      {
+        "name": "billing_shipping_mismatch",
+        "points": 15,
+        "explanation": "Billing and shipping countries differ."
+      },
+      {
+        "name": "young_account",
+        "points": 8,
+        "explanation": "Account is less than 30 days old."
+      },
+      {
+        "name": "new_device",
+        "points": 10,
+        "explanation": "Transaction originated from a new device."
+      }
+    ]
+  },
+  {
+    "transaction_id": "tx_1004",
+    "user_id": "u_004",
+    "score": 35,
+    "level": "low",
+    "decision": "approve",
+    "factors": [
+      {
+        "name": "failed_login_spike",
+        "points": 10,
+        "explanation": "Three or more failed login attempts were observed."
+      },
+      {
+        "name": "elevated_velocity",
+        "points": 10,
+        "explanation": "Three or more transactions occurred in the last hour."
+      },
+      {
+        "name": "prior_chargeback",
+        "points": 10,
+        "explanation": "User has one prior chargeback."
+      },
+      {
+        "name": "unusual_hour",
+        "points": 5,
+        "explanation": "Transaction occurred between midnight and 5 AM."
+      }
+    ]
+  },
+  {
+    "transaction_id": "tx_1005",
+    "user_id": "u_005",
+    "score": 0,
+    "level": "low",
+    "decision": "approve",
+    "factors": []
+  },
+  {
+    "transaction_id": "tx_1006",
+    "user_id": "u_006",
+    "score": 100,
+    "level": "high",
+    "decision": "block",
+    "factors": [
+      {
+        "name": "medium_high_amount",
+        "points": 15,
+        "explanation": "Transaction amount is at or above 500."
+      },
+      {
+        "name": "ip_billing_mismatch",
+        "points": 15,
+        "explanation": "IP country differs from billing country."
+      },
+      {
+        "name": "new_account",
+        "points": 15,
+        "explanation": "Account is less than 7 days old."
+      },
+      {
+        "name": "velocity_spike",
+        "points": 20,
+        "explanation": "Five or more transactions occurred in the last hour."
+      },
+      {
+        "name": "new_device",
+        "points": 10,
+        "explanation": "Transaction originated from a new device."
+      },
+      {
+        "name": "high_risk_country",
+        "points": 15,
+        "explanation": "Transaction is associated with a high-risk country flag."
+      },
+      {
+        "name": "prior_chargeback",
+        "points": 10,
+        "explanation": "User has one prior chargeback."
+      },
+      {
+        "name": "unusual_hour",
+        "points": 5,
+        "explanation": "Transaction occurred between midnight and 5 AM."
+      }
+    ]
+  }
+]

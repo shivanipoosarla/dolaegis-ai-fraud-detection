@@ -1,0 +1,15 @@
+{
+  "transaction_id": "tx_api_001",
+  "user_id": "user_9001",
+  "amount": 1299.99,
+  "billing_country": "US",
+  "shipping_country": "CA",
+  "ip_country": "NG",
+  "account_age_days": 3,
+  "failed_login_count": 6,
+  "transactions_last_hour": 7,
+  "new_device": true,
+  "high_risk_country": true,
+  "chargeback_history_count": 2,
+  "hour_of_day": 2
+}

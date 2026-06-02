@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DolAegis Fraud Risk Dashboard</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0f172a;
+      --panel: #111827;
+      --muted: #94a3b8;
+      --text: #e5e7eb;
+      --line: #334155;
+      --low: #16a34a;
+      --medium: #ca8a04;
+      --high: #dc2626;
+      --review: #2563eb;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 32px; }
+    header { margin-bottom: 24px; }
+    h1 { margin: 0 0 8px; font-size: 34px; }
+    h2 { margin-top: 28px; }
+    .muted { color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+    .card .value { font-size: 30px; font-weight: 700; margin-top: 6px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+    table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: 14px; overflow: hidden; }
+    th, td { padding: 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: #cbd5e1; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+    .badge { display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .badge-low, .badge-approve { background: rgba(22,163,74,.2); color: #86efac; }
+    .badge-medium, .badge-manual_review { background: rgba(202,138,4,.2); color: #fde68a; }
+    .badge-high, .badge-block { background: rgba(220,38,38,.2); color: #fecaca; }
+    .note { border-left: 4px solid var(--review); padding: 12px 16px; background: rgba(37,99,235,.12); }
+    code { color: #bfdbfe; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>DolAegis Fraud Risk Dashboard</h1>
+      <p class="muted">Static merchant dashboard generated from synthetic transaction scoring results. Generated 2026-06-01 16:18 UTC.</p>
+      <p class="note">Prototype scope: explainable rules-based scoring for portfolio demonstration. This is not a production ML model, payment integration, or compliance-certified fraud system.</p>
+    </header>
+
+    <section class="cards" aria-label="Summary metrics">
+      <div class="card"><div class="muted">Transactions</div><div class="value">6</div></div>
+      <div class="card"><div class="muted">Average Score</div><div class="value">47.17</div></div>
+      <div class="card"><div class="muted">High Risk</div><div class="value">2</div></div>
+      <div class="card"><div class="muted">Manual Review</div><div class="value">1</div></div>
+      <div class="card"><div class="muted">Approved</div><div class="value">3</div></div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Decision Queue</h2>
+        <ul>
+          <li><strong>2</strong> transaction(s) recommended for block/hold.</li>
+          <li><strong>1</strong> transaction(s) routed to manual review.</li>
+          <li><strong>3</strong> transaction(s) approved automatically.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Top Risk Factors</h2>
+        <ul><li><strong>new_device</strong>: 3 transaction(s)</li><li><strong>unusual_hour</strong>: 3 transaction(s)</li><li><strong>ip_billing_mismatch</strong>: 2 transaction(s)</li><li><strong>new_account</strong>: 2 transaction(s)</li><li><strong>velocity_spike</strong>: 2 transaction(s)</li></ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Transaction Review Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Transaction</th>
+            <th>User</th>
+            <th>Score</th>
+            <th>Risk</th>
+            <th>Decision</th>
+            <th>Factors</th>
+            <th>Recommended Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>tx_1002</td><td>u_002</td><td><strong>100</strong></td><td><span class="badge badge-high">high</span></td><td><span class="badge badge-block">block</span></td><td>high_amount, ip_billing_mismatch, new_account, many_failed_logins, velocity_spike, new_device, high_risk_country, repeated_chargebacks, unusual_hour</td><td>Block or hold order; verify identity/payment details before fulfillment.</td></tr>
+<tr><td>tx_1006</td><td>u_006</td><td><strong>100</strong></td><td><span class="badge badge-high">high</span></td><td><span class="badge badge-block">block</span></td><td>medium_high_amount, ip_billing_mismatch, new_account, velocity_spike, new_device, high_risk_country, prior_chargeback, unusual_hour</td><td>Block or hold order; verify identity/payment details before fulfillment.</td></tr>
+<tr><td>tx_1003</td><td>u_003</td><td><strong>48</strong></td><td><span class="badge badge-medium">medium</span></td><td><span class="badge badge-manual_review">manual review</span></td><td>medium_high_amount, billing_shipping_mismatch, young_account, new_device</td><td>Route to manual review; inspect account history, device, and payment context.</td></tr>
+<tr><td>tx_1004</td><td>u_004</td><td><strong>35</strong></td><td><span class="badge badge-low">low</span></td><td><span class="badge badge-approve">approve</span></td><td>failed_login_spike, elevated_velocity, prior_chargeback, unusual_hour</td><td>Approve automatically; continue passive monitoring.</td></tr>
+<tr><td>tx_1001</td><td>u_001</td><td><strong>0</strong></td><td><span class="badge badge-low">low</span></td><td><span class="badge badge-approve">approve</span></td><td>none</td><td>Approve automatically; continue passive monitoring.</td></tr>
+<tr><td>tx_1005</td><td>u_005</td><td><strong>0</strong></td><td><span class="badge badge-low">low</span></td><td><span class="badge badge-approve">approve</span></td><td>none</td><td>Approve automatically; continue passive monitoring.</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

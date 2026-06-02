@@ -1,0 +1,7 @@
+transaction_id,user_id,amount,billing_country,shipping_country,ip_country,account_age_days,failed_login_count,transactions_last_hour,new_device,high_risk_country,chargeback_history_count,hour_of_day
+tx_1001,u_001,79.99,US,US,US,420,0,1,false,false,0,14
+tx_1002,u_002,1299.50,US,US,NG,3,6,5,true,true,2,2
+tx_1003,u_003,620.00,US,CA,US,18,1,2,true,false,0,21
+tx_1004,u_004,310.75,GB,GB,GB,55,3,4,false,false,1,4
+tx_1005,u_005,45.25,US,US,US,700,0,1,false,false,0,10
+tx_1006,u_006,850.10,DE,DE,RU,5,2,6,true,true,1,1
