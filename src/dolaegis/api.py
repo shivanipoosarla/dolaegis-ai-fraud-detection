@@ -57,7 +57,7 @@ app = FastAPI(
         "REST-style API prototype for scoring SMB e-commerce transactions. "
         "This demo uses explainable rules, not a production ML fraud model."
     ),
-    version="0.5.0",
+    version="0.1.0",
 )
 
 
