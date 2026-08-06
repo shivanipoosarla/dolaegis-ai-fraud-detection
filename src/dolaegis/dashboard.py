@@ -133,7 +133,7 @@ def build_dashboard_html(results: List[RiskResult]) -> str:
     <header>
       <h1>DolAegis Fraud Risk Dashboard</h1>
       <p class="muted">Static merchant dashboard generated from synthetic transaction scoring results. Generated {generated_at}.</p>
-      <p class="note">Prototype scope: explainable rules-based scoring for portfolio demonstration. This is not a production ML model, payment integration, or compliance-certified fraud system.</p>
+      <p class="note"> Uses deterministic rules and synthetic data. It is not intended for production fraud decisions.</p>
     </header>
 
     <section class="cards" aria-label="Summary metrics">
