@@ -29,13 +29,7 @@ class RiskResult:
 
 
 class FraudRiskEngine:
-    """Explainable fraud-risk scoring engine.
-
-    The first portfolio version is intentionally rule-based. It demonstrates
-    product thinking and explainability without pretending to be a production ML
-    fraud model. A later version can add a trained model behind the same result
-    interface.
-    """
+   """Deterministic fraud-risk scoring engine."""
 
     def score(self, tx: Transaction) -> RiskResult:
         factors: List[RiskFactor] = []
