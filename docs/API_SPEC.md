@@ -1,6 +1,6 @@
-# API Spec
+# API Reference
 
-DolAegis includes a small FastAPI service to model the SaaS/API layer described in the product strategy.
+DolAegis exposes the scoring engine through a small FastAPI service..
 
 ## Run locally
 
