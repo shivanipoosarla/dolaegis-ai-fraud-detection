@@ -14,23 +14,14 @@ GOVERNANCE_VERSION = "2026.06-demo"
 
 
 def stable_hash(value: str) -> str:
-    """Return a short stable SHA-256 hash for demo audit records.
-
-    The prototype uses hashing so audit artifacts can demonstrate traceability
-    without writing raw user identifiers into generated logs.
-    """
+   """Build a self-contained static HTML dashboard."""
 
     digest = hashlib.sha256(value.encode("utf-8")).hexdigest()
     return digest[:16]
 
 
 def build_audit_record(tx: Transaction, result: RiskResult) -> Dict[str, Any]:
-    """Build a privacy-aware audit record for one scored transaction.
-
-    This is not a substitute for production audit logging. It is a portfolio
-    demonstration of what should be recorded for explainability, review, and
-    governance while minimizing sensitive fields.
-    """
+  """Build a pseudonymized audit record for one scoring decision."""
 
     return {
         "event_type": "fraud_score_decision",
