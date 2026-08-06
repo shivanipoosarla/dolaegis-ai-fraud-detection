@@ -1,8 +1,9 @@
-# Dashboard Prototype
 
-DolAegis includes a static HTML dashboard generated from scored transaction results.
+# Dashboard
 
-The dashboard is intentionally simple and self-contained. It does not require a frontend framework, database, login system, or hosted service. This keeps the portfolio version easy to run while still showing how fraud-scoring results could be presented to an SMB merchant or analyst.
+DolAegis generates a static HTML dashboard from scored transaction results.
+
+The dashboard runs locally and does not require a frontend framework, database, authentication system, or hosted service. It summarizes the output of the fraud-risk scoring engine for review.
 
 ## What the dashboard shows
 
