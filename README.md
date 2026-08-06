@@ -52,7 +52,6 @@ src/dolaegis/
 └── risk_engine.py  Fraud-risk scoring rules
 
 api-examples/       Example API request payloads
-config/             Scoring-policy metadata
 data/               Synthetic transaction data
 docs/               Technical documentation
 reports/            Generated sample outputs
