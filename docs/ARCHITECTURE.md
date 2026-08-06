@@ -1,53 +1,134 @@
 # Architecture
 
-DolAegis is organized as a small, testable Python prototype with both CLI and API entry points.
+DolAegis is a Python application with two entry points:
+
+- A command-line interface for processing transaction data from a CSV file
+- A FastAPI service for scoring transactions submitted as JSON
+
+Both entry points use the same transaction model and risk-scoring engine.
+
+## Components
+
+### Transaction model
+
+`models.py` defines the normalized transaction structure used by the scoring engine.
+
+For CSV input, it converts text values into the expected Python types and normalizes country codes to uppercase.
+
+### Risk-scoring engine
+
+`risk_engine.py` evaluates each transaction using deterministic rules.
+
+Each triggered rule produces a risk factor containing:
+
+- A factor name
+- A point value
+- An explanation
+
+The engine combines the points into a score from 0 to 100 and assigns one of three decisions:
+
+- `approve`
+- `manual_review`
+- `block`
+
+### Command-line interface
+
+`cli.py` reads transactions from a CSV file, sends each transaction to the scoring engine, and writes the generated outputs to the selected reports directory.
+
+The CLI produces:
+
+- A JSON report
+- A Markdown report
+- A static HTML dashboard
+- A JSONL audit log
+
+### API service
+
+`api.py` exposes the scoring engine through FastAPI.
+
+The service provides:
+
+- `GET /health`
+- `POST /score`
+- `POST /batch-score`
+
+Pydantic models validate API request fields before transactions are sent to the scoring engine.
+
+## API Data Flow
 
 ```text
-Synthetic transaction CSV              API JSON request
-        |                                      |
-        v                                      v
-CLI transaction loader              FastAPI /score endpoint
-        |                                      |
-        +--------------+-----------------------+
-                       |
-                       v
-             Transaction normalizer
-                       |
-                       v
-          Explainable risk scoring engine
-                       |
-                       v
-                 RiskResult objects
-                       |
-      +----------------+----------------+
-      |                                 |
-      v                                 v
-Markdown/JSON reports             API JSON response
+JSON request
+    |
+    v
+FastAPI endpoint
+    |
+    v
+Pydantic request validation
+    |
+    v
+Transaction model conversion
+    |
+    v
+FraudRiskEngine
+    |
+    +------------------+
+    |                  |
+    v                  v
+Risk result      Audit record
+    |                  |
+    +---------+--------+
+              |
+              v
+        JSON response
 ```
 
-## SaaS concept
+### Report generation
 
-A production SaaS version would replace synthetic CSV/API payloads with authenticated ingestion from e-commerce and payment platforms. Scored events would feed merchant dashboards, review queues, notification systems, and compliance/audit logs.
+`reporting.py` converts scoring results into JSON and Markdown reports.
 
-## Current design choice
+### Dashboard generation
 
-The current implementation is rule-based, not ML-based. This makes decisions explainable and easy to test. A later version could add a trained model score while preserving the explanation layer and API response contract.
+`dashboard.py` summarizes scoring results and generates a self-contained HTML dashboard.
 
+The dashboard includes:
 
-## Dashboard Layer
+- Transaction counts
+- Average risk score
+- Decision totals
+- Common risk factors
+- Transaction-level results
+- Recommended review actions
 
-The static dashboard generator converts scored results into an HTML risk-review view. It shows summary cards, decision queue counts, top risk factors, transaction-level decisions, and recommended actions. This mirrors the merchant-dashboard direction from the DolAegis product strategy while keeping the prototype easy to run locally.
+### Audit-record generation
 
+`governance.py` generates a structured audit record for each scoring decision.
 
-## Governance layer added in Step 4
+The record contains:
+
+- The transaction identifier
+- A hashed user identifier
+- The risk score and decision
+- The triggered risk-factor names
+- A reduced summary of the transaction inputs
+
+The audit records are written in JSONL format by the command-line workflow and returned as JSON by the API.
+
+## CLI Data Flow
 
 ```text
-Transaction Input
-  -> Validation / normalization
-  -> FraudRiskEngine
-  -> RiskResult
-  -> Report writers + Dashboard
-  -> Governance audit record
+CSV file
+    |
+    v
+CSV loader and transaction normalization
+    |
+    v
+FraudRiskEngine
+    |
+    v
+RiskResult objects
+    |
+    +-------------------+-------------------+------------------+
+    |                   |                   |                  |
+    v                   v                   v                  v
+JSON report       Markdown report     HTML dashboard     JSONL audit log
 ```
-
-The governance helper hashes user identifiers and records decision evidence in JSONL format. This demonstrates auditability and data-minimization thinking without storing real customer or payment data.
