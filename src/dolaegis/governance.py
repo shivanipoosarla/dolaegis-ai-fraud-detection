@@ -10,7 +10,7 @@ from typing import Iterable, Dict, Any
 from .models import Transaction
 from .risk_engine import RiskResult
 
-GOVERNANCE_VERSION = "2026.06-demo"
+AUDIT_SCHEMA_VERSION = "1.0"
 
 
 def stable_hash(value: str) -> str:
@@ -25,7 +25,7 @@ def build_audit_record(tx: Transaction, result: RiskResult) -> Dict[str, Any]:
 
     return {
         "event_type": "fraud_score_decision",
-        "governance_version": GOVERNANCE_VERSION,
+        "audit_schema_version": AUDIT_SCHEMA_VERSION,
         "transaction_id": tx.transaction_id,
         "user_hash": stable_hash(tx.user_id),
         "decision": result.decision,
