@@ -28,10 +28,6 @@ Open:
 reports/fraud_dashboard.html
 ```
 
-## Why this matters
-
-The original DolAegis strategy emphasizes real-time visibility, explainable decisions, merchant dashboards, alerts, and actionable recommendations for SMB users. This dashboard demonstrates that product direction without pretending the prototype is a full production SaaS platform.
-
 ## Current limitations
 
 - Static HTML only
